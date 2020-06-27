@@ -1,0 +1,8 @@
+tp.Print(screen,'BYE!!!')
+tp.Print(screen,'BYE!!!')
+tp.Print(screen,'BYE!!!')
+tp.Print(screen,'SEE YA SOON!!!!!!')
+pygame.display.flip()
+sleep(1)
+pygame.quit()
+quit()

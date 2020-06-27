@@ -1,0 +1,51 @@
+black=(0,0,0)
+pygame.mixer.music.load('game/brains.wav')
+tp.Print(screen, 'END OF THE WORLD', (255,0,0))
+pygame.display.flip()
+#pygame.mixer.music.play()
+sleep(5)
+zomb=pygame.image.load('game/zomb.png').convert_alpha()
+zspeed=0
+kills=0
+def die_zombie_die():
+	global zombx, zomby, zspeed, kills, zomb
+	kills+=1
+	if kills == 200:
+		for x in range(750):
+			screen.blit(zomb, (x,int(zomby)))
+			pygame.display.flip()
+		for y in range(625):
+			screen.blit(zomb, (zombx,y))
+			pygame.display.flip()
+		tp.height=200
+		tp.Print(screen, 'U WON')
+		pygame.display.flip()
+		sleep(5)
+		unfs()
+		home()
+	zombx=randint(0,750)
+	zomby=-75
+	zspeed+=0.25
+die_zombie_die()
+while 1:
+	screen.fill(black)
+	screen.blit(zomb, (zombx,int(zomby)))
+	zomby+=zspeed
+	for event in pygame.event.get():
+		handle(event)
+		if event.type == pygame.JOYBUTTONDOWN:
+			if joystick.get_button(5) == 1:
+				die_zombie_die()
+	tp.reset()
+	tp.Print(screen, str(clock.get_fps())+' FPS')
+	#if randint(0,200) == 1:
+	#	pygame.mixer.music.play()
+	if zomby >= 525:
+		tp.height=100
+		tp.Print(screen, '')
+		tp.Print(screen, "YOUR HEAD A 'SPLODE")
+		pygame.display.flip()
+		sleep(5)
+		break
+	pygame.display.flip()
+	clock.tick(10)
